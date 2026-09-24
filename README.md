@@ -1,5 +1,5 @@
 # Atividade-InvestApp
-Aplicação financeira simples para testes do Grupo 04
+Aplicação Testes Grupo 04
 
 Henrique Paulino Dayrell Capanema  
 Pedro Henrique De Oliveira Barbosa  
