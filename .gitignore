@@ -1,2 +1,9 @@
+# Credenciais e Variáveis
 .env
+
+# VS Code
 /investapp-test-suit/launch.json
+
+# Python
+__pycache__/
+*.pyc

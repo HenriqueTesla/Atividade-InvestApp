@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug: Pytest API Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/api",
+        "-v",
+        "-s"
+      ],
+      "env": {
+        "API_BASE_URL": "https://5bm1nctd1f.execute-api.us-east-1.amazonaws.com",
+        "TEST_USER": "userXX",
+        "TEST_PASSWORD": "password"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
