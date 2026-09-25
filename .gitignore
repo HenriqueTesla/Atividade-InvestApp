@@ -2,7 +2,7 @@
 .env
 
 # VS Code
-/investapp-test-suit/launch.json
+investapp-test-suit/.vscode/launch.json
 
 # Python
 __pycache__/
