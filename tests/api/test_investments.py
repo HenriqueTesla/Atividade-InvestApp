@@ -92,3 +92,47 @@ def test_criar_investimentos_ddt_csv(
     )
 
     assert response.status_code == status_esperado
+
+
+def test_listar_investimentos(base_url, auth_headers):
+    response = requests.get(
+        f"{base_url}/api/investments",
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert isinstance(data, list)
+
+
+def test_excluir_investimento(base_url, auth_headers):
+    payload = {
+        "asset_name": "CDB",
+        "amount": 1000.00,
+        "purchase_price": 1.00,
+        "days_invested": 30,
+        "planned_days": 365,
+    }
+
+    criar = requests.post(
+        f"{base_url}/api/investments",
+        json=payload,
+        headers=auth_headers,
+    )
+
+    assert criar.status_code == 201
+
+    investimento = criar.json()
+
+    assert "id" in investimento
+
+    investment_id = investimento["id"]
+
+    response = requests.delete(
+        f"{base_url}/api/investments/{investment_id}",
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 200
