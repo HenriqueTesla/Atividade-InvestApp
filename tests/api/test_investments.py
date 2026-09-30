@@ -136,3 +136,19 @@ def test_excluir_investimento(base_url, auth_headers):
     )
 
     assert response.status_code == 200
+
+
+def test_carregar_dados_investimentos_csv_arquivo_inexistente(
+    monkeypatch,
+):
+    monkeypatch.setattr(
+        Path,
+        "exists",
+        lambda self: False,
+    )
+
+    with pytest.raises(
+        FileNotFoundError,
+        match="Arquivo de massa CSV não encontrado",
+    ):
+        carregar_dados_investimentos_csv()

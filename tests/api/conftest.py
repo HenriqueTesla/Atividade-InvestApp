@@ -11,7 +11,7 @@ TEST_USER = os.getenv("TEST_USER")
 TEST_PASSWORD = os.getenv("TEST_PASSWORD")
 
 
-def pytest_configure(config):
+def verificar_variaveis_ambiente():
     print("\n" + "=" * 60)
     print(" [ENV CHECK] VERIFICAÇÃO DE VARIÁVEIS DE AMBIENTE")
     print(f" -> API_BASE_URL : {BASE_URL}")
@@ -32,6 +32,10 @@ def pytest_configure(config):
         )
 
     print("=" * 60 + "\n")
+
+
+def pytest_configure(config):
+    verificar_variaveis_ambiente()
 
 
 @pytest.fixture(scope="session")
