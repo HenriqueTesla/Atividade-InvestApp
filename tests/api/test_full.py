@@ -6,7 +6,6 @@ TEST_PASSWORD = os.getenv("TEST_PASSWORD")
 
 
 def test_fluxo_geral(base_url):
-
     payload = {
         "username": TEST_USER,
         "password": TEST_PASSWORD,
@@ -176,3 +175,21 @@ def test_fluxo_geral(base_url):
     ids = [item["id"] for item in investments]
 
     assert investment_id not in ids
+
+
+def test_criar_investimento_valor_negativo(base_url, auth_headers):
+    payload = {
+        "asset_name": "CDB",
+        "amount": -100.00,
+        "purchase_price": 1.00,
+        "days_invested": 30,
+        "planned_days": 365,
+    }
+
+    response = requests.post(
+        f"{base_url}/api/investments",
+        json=payload,
+        headers=auth_headers,
+    )
+
+    assert response.status_code == 400
