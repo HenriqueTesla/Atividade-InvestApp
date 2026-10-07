@@ -49,23 +49,22 @@ def test_fluxo_geral(base_url):
             break
 
     assert poupanca is not None
-    assert "id" in poupanca
-    assert "rate" in poupanca
+    assert "asset_name" in poupanca
+    assert "annual_rate" in poupanca
 
-    asset_id = poupanca["id"]
-    rate_original = poupanca["rate"]
+    rate_original = poupanca["annual_rate"]
 
-    assert asset_id is not None
     assert rate_original is not None
 
     nova_rate = 10.0
 
     payload = {
-        "rate": nova_rate
+        "asset_name": "Poupança",
+        "annual_rate": nova_rate,
     }
 
     response = requests.put(
-        f"{base_url}/api/assets/{asset_id}/rate",
+        f"{base_url}/api/assets",
         json=payload,
         headers=auth_headers,
     )
@@ -85,19 +84,20 @@ def test_fluxo_geral(base_url):
     poupanca_atualizada = None
 
     for asset in assets:
-        if asset["id"] == asset_id:
+        if asset["asset_name"] == "Poupança":
             poupanca_atualizada = asset
             break
 
     assert poupanca_atualizada is not None
-    assert poupanca_atualizada["rate"] == nova_rate
+    assert poupanca_atualizada["annual_rate"] == nova_rate
 
     payload = {
-        "rate": rate_original
+        "asset_name": "Poupança",
+        "annual_rate": rate_original,
     }
 
     response = requests.put(
-        f"{base_url}/api/assets/{asset_id}/rate",
+        f"{base_url}/api/assets",
         json=payload,
         headers=auth_headers,
     )
